@@ -1,10 +1,10 @@
 <template>
   <q-layout>
-    <q-header elevated class="bg-teal">
+    <q-header class="bg-teal">
       <q-toolbar>
 
         <q-toolbar-title>
-          Charge Route App
+          Charge Route
         </q-toolbar-title>
 
         <q-btn flat round dense icon="login" />
