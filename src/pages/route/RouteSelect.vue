@@ -2,9 +2,9 @@
 <q-page id="RouteSelect">
   <q-toolbar class="text-white bg-teal-8">
     <q-toolbar-title>
-      Toolbar
+      Route
     </q-toolbar-title>
-    <q-btn flat round dense icon="more_vert" />
+    <q-btn to="/route/saved-routes" flat round dense icon="collections_bookmark" />
   </q-toolbar>
 
   <div class="q-pa-md form-style">
@@ -25,9 +25,7 @@
     <div class="q-pt-md">
       <q-btn label="Search" size="lg" class="full-width" color="black" />
     </div>
-
   </div>
-
 </q-page>
 </template>
 
