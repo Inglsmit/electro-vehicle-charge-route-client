@@ -1,10 +1,10 @@
+<template>
+  <router-view></router-view>
+</template>
+
 <script setup>
 
 </script>
-
-<template>
-  <div></div>
-</template>
 
 <style lang="scss">
 
