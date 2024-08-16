@@ -14,19 +14,19 @@
 
       <div class="q-pa-md q-gutter-md">
         <div class="text-center">Register by filling in all the data</div>
-        <q-input outlined stack-label label="Email">
+        <q-input v-model="email" outlined stack-label label="Email">
           <template v-slot:append>
             <q-icon name="close" />
           </template>
         </q-input>
 
-        <q-input outlined stack-label label="Password">
+        <q-input v-model="password" outlined stack-label label="Password">
           <template v-slot:append>
             <q-icon name="close" />
           </template>
         </q-input>
         <div>
-          <q-btn label="Login" size="lg" class="full-width" color="black" />
+          <q-btn @click="login" label="Login" size="lg" class="full-width" color="black" />
         </div>
 
         <div class="q-px-md q-mt-xl text-center">
@@ -40,7 +40,27 @@
 </template>
 
 <script setup>
+import { ref } from 'vue'
+import { server } from 'boot/axios'
 
+const email = ref('')
+const password = ref('')
+
+const login = async () => {
+  await server.get('/sanctum/csrf-cookie') // Get CSRF-token
+
+  const res = await server.post('login', {
+    email: email.value,
+    password: password.value
+  })
+  console.log(res)
+
+  const userData = await server.get('/api/user', {
+    email: email.value,
+    password: password.value
+  })
+  console.log(userData)
+}
 </script>
 
 <style lang="scss">
