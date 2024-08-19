@@ -41,25 +41,21 @@
 
 <script setup>
 import { ref } from 'vue'
-import { server } from 'boot/axios'
+import { useUserStore } from 'stores/user-store'
+
+const userStore = useUserStore()
 
 const email = ref('')
 const password = ref('')
 
 const login = async () => {
-  await server.get('/sanctum/csrf-cookie') // Get CSRF-token
-
-  const res = await server.post('login', {
-    email: email.value,
-    password: password.value
-  })
-  console.log(res)
-
-  const userData = await server.get('/api/user', {
-    email: email.value,
-    password: password.value
-  })
-  console.log(userData)
+  // get the token firstly
+  await userStore.getSanctumCookie()
+  // Login user
+  await userStore.login(email.value, password.value)
+  // Get user data
+  const user = await userStore.getUser()
+  userStore.setUser(user.data)
 }
 </script>
 
