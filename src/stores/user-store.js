@@ -23,6 +23,20 @@ export const useUserStore = defineStore('user', {
       }
     },
 
+    async register (firstName, lastName, email, password, passwordConfirm) {
+      try {
+        await server.post('register', {
+          first_name: firstName,
+          last_name: lastName,
+          email,
+          password,
+          password_confirmation: passwordConfirm
+        })
+      } catch (error) {
+        if (error) throw error
+      }
+    },
+
     async getSanctumCookie () {
       try {
         await server.get('/sanctum/csrf-cookie')
@@ -41,8 +55,8 @@ export const useUserStore = defineStore('user', {
 
     setUser (payload) {
       if (payload.id) this.id = payload.id
-      if (payload.firstName) this.firstName = payload.firstName
-      if (payload.lastName) this.lastName = payload.lastName
+      if (payload.first_name) this.firstName = payload.first_name
+      if (payload.last_name) this.lastName = payload.last_name
       if (payload.email) this.email = payload.email
     },
 
